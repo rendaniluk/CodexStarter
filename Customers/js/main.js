@@ -77,12 +77,6 @@ $(document).ready(function() { // wait for document to be ready
 
       var inputBox = document.querySelector('.input');
       var input = inputBox.value;
-      inputBox.addEventListener('keyup', newData.filter(function(input){
-            resultsElem.innerHTML = tempResults = compTemp({
-              myData: newData
-            });
-          return newData;
-      }));
 
       var array = [opportunity.length, customer.length, prospect.length,
         supplier.length, competitor.length, warehouse.length

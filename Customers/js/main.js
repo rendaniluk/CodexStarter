@@ -43,6 +43,7 @@ $(document).ready(function() { // wait for document to be ready
 
 
 
+
       var tempScript = document.querySelector('.alphaAt1');
       var compTemp = Handlebars.compile(tempScript.innerHTML);
       var tempResults = compTemp({
@@ -51,6 +52,45 @@ $(document).ready(function() { // wait for document to be ready
       var resultsElem = document.querySelector('.results'); // <<- handle for results
       resultsElem.innerHTML = tempResults; // <<-  add data to DOM
       console.log(newData);
+
+      var filter = function(evt) {
+        var companyRelation = evt.target.value;
+        console.log(companyRelation);
+        var filteredData = [];
+        for (var i = 0; i < newData.length; i++) {
+          var optionSelected = newData[i];
+          if (newData[i].type === companyRelation) {
+            filteredData.push(optionSelected);
+            var tempResults = compTemp({
+              myData: filteredData
+            });
+          }else if (companyRelation === 'All') {
+            var tempResults = compTemp({
+              myData: newData
+            });
+          }
+        }
+        resultsElem.innerHTML = tempResults; // <<-  add data to DOM
+      }
+
+      var op = document.querySelector('.opportunity');
+      var cu = document.querySelector('.customer');
+      var pr = document.querySelector('.prospect');
+      var su = document.querySelector('.supplier');
+      var co = document.querySelector('.competitor');
+      var wa = document.querySelector('.warehouse');
+      var all = document.querySelector('.All');
+
+
+      op.addEventListener('click', filter);
+      cu.addEventListener('click', filter);
+      pr.addEventListener('click', filter);
+      su.addEventListener('click', filter);
+      co.addEventListener('click', filter);
+      wa.addEventListener('click', filter);
+      all.addEventListener('click', filter);
+
+
       var opportunity = [];
       var customer = [];
       var prospect = [];
@@ -75,13 +115,69 @@ $(document).ready(function() { // wait for document to be ready
         }
       }
 
-      var inputBox = document.querySelector('.input');
-      var input = inputBox.value;
+      // var array = [opportunity.length, customer.length, prospect.length,
+      //   supplier.length, competitor.length, warehouse.length
+      // ];
 
-      var array = [opportunity.length, customer.length, prospect.length,
-        supplier.length, competitor.length, warehouse.length
-      ];
-console.log(array);
+      window.onload = function() {
+        var chart = new CanvasJS.Chart("chartContainer", {
+          title: {
+            text: "Graphical represantation of relationship type",
+            fontFamily: "Impact",
+            fontWeight: "normal"
+          },
+
+          legend: {
+            verticalAlign: "bottom",
+            horizontalAlign: "center"
+          },
+          data: [{
+            //startAngle: 45,
+            indexLabelFontSize: 20,
+            indexLabelFontFamily: "Garamond",
+            indexLabelFontColor: "darkgrey",
+            indexLabelLineColor: "darkgrey",
+            indexLabelPlacement: "outside",
+            type: "pie",
+            showInLegend: true,
+            toolTipContent: "{y} - <strong>#percent%</strong>",
+            dataPoints: [{
+                y: opportunity.length,
+                legendText: "Opportunity(O)",
+                indexLabel: "O"
+              },
+              {
+                y: customer.length,
+                legendText: "Customer(C)",
+                indexLabel: "C"
+              },
+              {
+                y: prospect.length,
+                legendText: "Prospect(P)",
+                indexLabel: "P"
+              },
+              {
+                y: supplier.length,
+                legendText: "Supplier(V)",
+                indexLabel: "V"
+              },
+              {
+                y: competitor.length,
+                legendText: "Competitor(D)",
+                indexLabel: "D"
+              },
+              {
+                y: warehouse.length,
+                legendText: "Warehouse(W)",
+                indexLabel: "W"
+              }
+            ]
+          }]
+        });
+
+        chart.render();
+      }
+      // console.log(array);
 
     })
 

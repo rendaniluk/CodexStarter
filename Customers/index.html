@@ -12,78 +12,20 @@
   <!-- Place favicon.ico in the root directory -->
   <script src="handlebars.min.js" charset="utf-8"></script>
   <script src="canvasjs.min.js" charset="utf-8"></script>
-
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript">
-    window.onload = function() {
-      var chart = new CanvasJS.Chart("chartContainer", {
-        title: {
-          text: "Address Book",
-          fontFamily: "Impact",
-          fontWeight: "normal"
-        },
-
-        legend: {
-          verticalAlign: "bottom",
-          horizontalAlign: "center"
-        },
-        data: [{
-          //startAngle: 45,
-          indexLabelFontSize: 20,
-          indexLabelFontFamily: "Garamond",
-          indexLabelFontColor: "darkgrey",
-          indexLabelLineColor: "darkgrey",
-          indexLabelPlacement: "outside",
-          type: "pie",
-          showInLegend: true,
-          dataPoints: [{
-              y: 20,
-              legendText: "Opportunity 71.4%",
-              indexLabel: "Opportunity 71.4%"
-            },
-            {
-              y: 6,
-              legendText: "Customer 21.4%",
-              indexLabel: "Customer 21.4%"
-            },
-            {
-              y: 0,
-              legendText: "Prospect 0%",
-              indexLabel: "Prospect 0%"
-            },
-            {
-              y: 0,
-              legendText: "Supplier 0%",
-              indexLabel: "Supplier 0%"
-            },
-            {
-              y: 0,
-              legendText: "Competitor 0%",
-              indexLabel: "Competitor 0%"
-            },
-            {
-              y: 2,
-              legendText: "Warehouse 0.071%",
-              indexLabel: "Warehouse 0.071%"
-            }
-          ]
-        }]
-      });
-
-      chart.render();
-    }
-  </script>
   <!-- <script type="text/javascript" src="canvasjs.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
-
   <script class="alphaAt1" type="text/handlebars-x">
-    <table class="table">
+    <table class="table table-bordered">
       <thead>
 
-        <th>Type</th>
+        <th>Relationship Type</th>
         <th>Company Name</th>
 
       </thead>
@@ -108,12 +50,33 @@
         <![endif]-->
 
   <!-- Add your site or application content here -->
-  <div id="chartContainer" style="height: 400px; width: 100%;">
-  </div><br><br><br>
-<input class="input" type="search" name="name" placeholder="Search Company" value=""><br><br>
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Address Book Dashboard</a>
+      </div>
+    </div>
+  </nav>
+  <div class="col-sm-12">
+    <label class="radio-inline"><input type="radio" name='choose' class="All" value="All" checked></input>All Type</label>
+    <label class="radio-inline"><input type="radio" name='choose' class="opportunity" value="O"></input>Opportunity(O)</label>
+    <label class="radio-inline"><input type="radio" name='choose' class="customer" value="C"></input>Customer(C)</label>
+    <label class="radio-inline"><input type="radio" name='choose' class="prospect" value="P"></input>Prospect(P)</label>
+    <label class="radio-inline"><input type="radio" name='choose' class="supplier" value="V"></input>Supplier(V)</label>
+    <label class="radio-inline"><input type="radio" name='choose' class="competitor" value="D"></input>Competitor(D)</label>
+    <label class="radio-inline"><input type="radio" name='choose' class="warehouse" value="W"></input>Warehouse(W)</label>
+
+  </div>
+<br><br><br>
+  <div class="col-sm-6">
+    <div id="chartContainer" style="height: 400px; width: 100%;">
+    </div>
+  </div>
+<div class="col-sm-6">
   <div class="results">
 
   </div>
+</div>
   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
   <script>
     window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')

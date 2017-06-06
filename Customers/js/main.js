@@ -43,7 +43,6 @@ $(document).ready(function() { // wait for document to be ready
 
 
 
-
       var tempScript = document.querySelector('.alphaAt1');
       var compTemp = Handlebars.compile(tempScript.innerHTML);
       var tempResults = compTemp({
@@ -59,18 +58,25 @@ $(document).ready(function() { // wait for document to be ready
         var filteredData = [];
         for (var i = 0; i < newData.length; i++) {
           var optionSelected = newData[i];
-          if (newData[i].type === companyRelation) {
+          if (optionSelected.type === companyRelation) {
             filteredData.push(optionSelected);
             var tempResults = compTemp({
               myData: filteredData
             });
-          }else if (companyRelation === 'All') {
-            var tempResults = compTemp({
-              myData: newData
-            });
           }
+
+        }
+        if (filteredData.length < 1) {
+          var msg = "<i class='fa fa-exclamation-triangle' aria-hidden='true'></i> no relationship for selected option <i class='fa fa-exclamation-triangle' aria-hidden='true'></i>"
+          tempResults = msg;
+        }
+        if (companyRelation === 'All') {
+          var tempResults = compTemp({
+            myData: newData
+          });
         }
         resultsElem.innerHTML = tempResults; // <<-  add data to DOM
+
       }
 
       var op = document.querySelector('.opportunity');
@@ -132,7 +138,7 @@ $(document).ready(function() { // wait for document to be ready
             horizontalAlign: "center"
           },
           data: [{
-            //startAngle: 45,
+            startAngle: 45,
             indexLabelFontSize: 20,
             indexLabelFontFamily: "Garamond",
             indexLabelFontColor: "darkgrey",
@@ -142,36 +148,30 @@ $(document).ready(function() { // wait for document to be ready
             showInLegend: true,
             toolTipContent: "{y} - <strong>#percent%</strong>",
             dataPoints: [{
-                y: opportunity.length,
-                legendText: "Opportunity(O)",
-                indexLabel: "O"
-              },
-              {
-                y: customer.length,
-                legendText: "Customer(C)",
-                indexLabel: "C"
-              },
-              {
-                y: prospect.length,
-                legendText: "Prospect(P)",
-                indexLabel: "P"
-              },
-              {
-                y: supplier.length,
-                legendText: "Supplier(V)",
-                indexLabel: "V"
-              },
-              {
-                y: competitor.length,
-                legendText: "Competitor(D)",
-                indexLabel: "D"
-              },
-              {
-                y: warehouse.length,
-                legendText: "Warehouse(W)",
-                indexLabel: "W"
-              }
-            ]
+              y: opportunity.length,
+              legendText: "Opportunity(O)",
+              indexLabel: "O"
+            }, {
+              y: customer.length,
+              legendText: "Customer(C)",
+              indexLabel: "C"
+            }, {
+              y: prospect.length,
+              legendText: "Prospect(P)",
+              // indexLabel: "P"
+            }, {
+              y: supplier.length,
+              legendText: "Supplier(V)",
+              // indexLabel: "V"
+            }, {
+              y: competitor.length,
+              legendText: "Competitor(D)",
+              // indexLabel: "D"
+            }, {
+              y: warehouse.length,
+              legendText: "Warehouse(W)",
+              indexLabel: "W"
+            }]
           }]
         });
 
